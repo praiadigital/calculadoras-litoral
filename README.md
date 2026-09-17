@@ -1,2 +1,5 @@
-# calculadoras-litoral
-Calculadoras imobiliárias do litoral — financiamento, ROI, temporada e valuation | Satélite de praia.digital
+# 🧮 Calculadoras do Litoral
+
+Central de calculadoras imobiliárias: financiamento (Price), ROI de temporada e valuation por R$/m².
+
+🌐 https://praia.digital/calculadoras-litoral/ · 🛰️ Satélite da rede [Praia Digital](https://praia.digital)
