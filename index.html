@@ -1,57 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calculadoras do Litoral — financiamento, ROI, valorização e m²</title>
-<meta name="description" content="4 calculadoras imobiliárias essenciais para o litoral paulista em um só lugar. Satélite da rede praia.digital">
-<style>
-body{margin:0;font-family:system-ui,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
-header{padding:24px;text-align:center;background:linear-gradient(120deg,#1d4ed8,#3b82f6)}
-nav a{color:#fde047;margin:0 8px;text-decoration:none;font-size:14px}
-.wrap{max-width:780px;margin:auto;padding:24px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.tabs button{background:#1e293b;color:#e2e8f0;border:none;padding:10px 16px;border-radius:99px;cursor:pointer}
-.tabs button.on{background:#3b82f6}
-.panel{background:#1e293b;border-radius:16px;padding:24px;display:none}
-.panel.on{display:block}
-label{display:block;margin:12px 0 4px;font-weight:600}
-input{width:100%;padding:12px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#fff;font-size:16px}
-.res{margin-top:16px;background:#0f172a;border-radius:12px;padding:16px;font-size:17px}
-.res b{color:#4ade80}
-footer{padding:20px;text-align:center;font-size:13px;color:#94a3b8}
-footer a{color:#93c5fd}
-</style></head>
-<body>
-<header><h1>🧮 Calculadoras do Litoral</h1><p>4 ferramentas essenciais em um só painel</p>
-<nav><a href="https://praia.digital">Praia Digital</a><a href="https://praia.digital/calculadoras">Calculadoras Pro</a><a href="https://praia.digital/simulador-credito">Simulador de Crédito</a><a href="https://praia.digital/apps">Todos os apps</a></nav></header>
-<div class="wrap">
-<div class="tabs"><button class="on" onclick="tab(0,this)">🏦 Financiamento</button><button onclick="tab(1,this)">📈 ROI Temporada</button><button onclick="tab(2,this)">🚀 Valorização</button><button onclick="tab(3,this)">📐 Preço por m²</button></div>
-<div class="panel on"><h2>Parcela (Tabela Price)</h2>
-<label>Valor financiado (R$)</label><input type="number" id="f_v" value="400000" oninput="c1()">
-<label>Taxa anual (%)</label><input type="number" id="f_t" value="10.5" oninput="c1()">
-<label>Prazo (anos)</label><input type="number" id="f_p" value="30" oninput="c1()">
-<div class="res" id="r1"></div></div>
-<div class="panel"><h2>ROI de Temporada</h2>
-<label>Valor do imóvel (R$)</label><input type="number" id="r_v" value="600000" oninput="c2()">
-<label>Renda líquida mensal (R$)</label><input type="number" id="r_m" value="4500" oninput="c2()">
-<div class="res" id="r2"></div></div>
-<div class="panel"><h2>Valorização Projetada</h2>
-<label>Valor atual (R$)</label><input type="number" id="v_v" value="600000" oninput="c3()">
-<label>Valorização anual (%)</label><input type="number" id="v_t" value="8" oninput="c3()">
-<label>Anos</label><input type="number" id="v_a" value="10" oninput="c3()">
-<div class="res" id="r3"></div></div>
-<div class="panel"><h2>Preço por m²</h2>
-<label>Preço do imóvel (R$)</label><input type="number" id="m_v" value="600000" oninput="c4()">
-<label>Área (m²)</label><input type="number" id="m_a" value="60" oninput="c4()">
-<div class="res" id="r4"></div></div>
-</div>
-<footer>Rede <a href="https://praia.digital">praia.digital</a> · <a href="https://praia.digital/calculadora-temporada">Calc. Temporada</a> · <a href="https://praia.digital/calculadora-custos">Calc. Custos</a> · <a href="https://praia.digital/radar-precos">Radar de Preços</a></footer>
-<script>
-function fmt(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR')}
-function tab(i,el){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.panel')[i].classList.add('on');document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
-function c1(){const V=+f_v.value,i=+f_t.value/100/12,n=+f_p.value*12;const p=V*i/(1-Math.pow(1+i,-n));r1.innerHTML=`Parcela: <b>${fmt(p)}</b>/mês · Total pago: ${fmt(p*n)} · Juros: ${fmt(p*n-V)}<br>Renda mínima sugerida (30%): <b>${fmt(p/0.3)}</b>`;}
-function c2(){const y=+r_m.value*12/+r_v.value*100;r2.innerHTML=`Yield anual: <b>${y.toFixed(1)}%</b> · Payback: <b>${(+r_v.value/(+r_m.value*12)).toFixed(1)} anos</b><br>${y>8?'🔥 Acima da média do litoral (6-8%)':'Veja como melhorar no <a style="color:#93c5fd" href="https://praia.digital/marea">Maréa</a>'}`;}
-function c3(){const f=+v_v.value*Math.pow(1+ +v_t.value/100,+v_a.value);r3.innerHTML=`Em ${v_a.value} anos: <b>${fmt(f)}</b> (ganho de ${fmt(f-+v_v.value)})<br>Compare bairros no <a style="color:#93c5fd" href="https://praia.digital/radar-precos">Radar de Preços</a>`;}
-function c4(){const v=+m_v.value/+m_a.value;r4.innerHTML=`<b>${fmt(v)}/m²</b><br>Média Gonzaga/Santos: R$ 12.400/m² · Riviera: R$ 15.200/m² (fonte: <a style="color:#93c5fd" href="https://praia.digital/radar-precos">Radar de Preços</a>)`;}
-c1();c2();c3();c4();
-</script></body></html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Calculadoras do Litoral — todas em um lugar | Praia Digital</title><meta name="description" content="Todas as calculadoras imobiliárias do litoral: financiamento, ROI, temporada, custos e reforma."><link rel="canonical" href="https://praia.digital/calculadoras-litoral/"><style>body{font-family:system-ui,-apple-system,sans-serif;margin:0;background:#f8fafc;color:#0f172a;line-height:1.6}.hero{background:linear-gradient(135deg,#0c4a6e,#0ea5e9);color:#fff;padding:60px 20px;text-align:center}.container{max-width:900px;margin:auto;padding:30px 20px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.app{display:block;background:#fff;border-radius:13px;padding:21px;text-decoration:none;color:#0f172a;box-shadow:0 3px 10px #0001;border-left:6px solid #0ea5e9}.app:hover{transform:translateY(-2px);box-shadow:0 8px 20px #0002}small{color:#475569}footer{text-align:center;padding:24px;color:#64748b}</style></head><body><header class="hero"><h1>🧮 Calculadoras do Litoral</h1><p>Todas as calculadoras imobiliárias da rede Praia Digital em um só lugar.</p></header><main class="container"><section class="grid">
+<a class="app" href="https://praia.digital/calculadora-custos/">🧾 <strong>Calculadora de Custos</strong><br><small>ITBI, registro, cartório, corretagem e custo total de compra.</small></a>
+<a class="app" href="https://praia.digital/calculadora-temporada/">🏖️ <strong>Calculadora de Temporada</strong><br><small>Rendimento anual Airbnb: bruto, líquido e yield.</small></a>
+<a class="app" href="https://praia.digital/simulador-roi/">📈 <strong>Simulador ROI</strong><br><small>Retorno de locação de temporada no litoral.</small></a>
+<a class="app" href="https://praia.digital/simulador-credito/">🏦 <strong>Simulador de Crédito</strong><br><small>FGTS, Minha Casa Minha Vida, SBPE e financiamento.</small></a>
+<a class="app" href="https://praia.digital/reforma-roi/">🏗️ <strong>Reforma ROI</strong><br><small>Retorno da reforma antes de vender ou alugar.</small></a>
+<a class="app" href="https://praia.digital/temporada-ou-anual/">⚖️ <strong>Temporada ou Anual?</strong><br><small>Compare as duas estratégias de renda lado a lado.</small></a>
+<a class="app" href="https://praia.digital/preco-justo/">💸 <strong>Preço Justo</strong><br><small>Sua diária está barata, justa ou cara?</small></a>
+<a class="app" href="https://praia.digital/plano-litoral/">🎯 <strong>Plano Litoral</strong><br><small>Quanto guardar por mês para comprar na praia.</small></a>
+</section></main><footer><a href="https://praia.digital/apps/">🌐 Apps Praia Digital</a> · <a href="https://praia.digital/">praia.digital</a></footer></body></html>
